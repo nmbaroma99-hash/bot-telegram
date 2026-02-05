@@ -30,7 +30,7 @@ install_packages()
 
 # ================== CẤU HÌNH ==================
 
-TOKEN = os.getenv('BOT_TOKEN', 'YOUR_TOKEN_HERE')
+TOKEN = 8042723997:AAHnz2swmvdnjeYwDOwNiBDArNo77f_wuLI
 
 if TOKEN == 'YOUR_TOKEN_HERE':
     print("❌ ERROR: Set BOT_TOKEN environment variable!")
