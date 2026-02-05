@@ -37,7 +37,7 @@ if TOKEN == 'YOUR_TOKEN_HERE':
     print("💡 On Render: Settings → Environment → Add BOT_TOKEN")
     sys.exit(1)
 
-bot = telebot.TeleBot(TOKEN)
+bot = telebot.TeleBot(TOKEN, skip_pending=True)  # THÊM skip_pending
 
 # ================== THUẬT TOÁN DỰ ĐOÁN ==================
 
@@ -137,19 +137,26 @@ def run_web():
 def run_bot():
     print("🤖 Starting bot...")
     try:
+        # XÓA WEBHOOK CŨ TRƯỚC KHI POLLING
+        bot.remove_webhook()
+        
         bot_info = bot.get_me()
         print(f"✅ Bot: @{bot_info.username}")
     except Exception as e:
         print(f"❌ Bot error: {e}")
         return
     
-    print("✅ Bot ready!")
-    bot.polling(none_stop=True, timeout=60)
+    print("✅ Bot ready! Starting polling...")
+    
+    # DÙNG interval=3 để tránh request quá nhanh
+    bot.polling(none_stop=True, timeout=60, interval=3)
 
 if __name__ == '__main__':
-    # Chạy web server
-    web_thread = Thread(target=run_web, daemon=True)
-    web_thread.start()
+    # Chỉ chạy web server nếu cần (Render yêu cầu)
+    if os.environ.get('RENDER', False):
+        web_thread = Thread(target=run_web, daemon=True)
+        web_thread.start()
+        print("✅ Web server started for Render")
     
     # Chạy bot
     run_bot()
