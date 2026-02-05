@@ -30,7 +30,7 @@ install_packages()
 
 # ================== CẤU HÌNH ==================
 
-TOKEN = "8042723997:AAHnz2swmvdnjeYwDOwNiBDArNo77f_wuLI"
+TOKEN = "8554891953:AAGboYgOwRT9wPPONMUmSPozx3v0PH2GeQo"
 
 if TOKEN == 'YOUR_TOKEN_HERE':
     print("❌ ERROR: Set BOT_TOKEN environment variable!")
